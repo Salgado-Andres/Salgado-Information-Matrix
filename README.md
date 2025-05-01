@@ -1,3 +1,8 @@
+<p align="center">
+  <img src="./awakening_sigil.png" width="260" alt="Awakening Sigil">
+</p>
+
+
 # Salgado Information Matrix
 
 🧠 The Salgado Information Matrix is a symbolic AI orchestration framework built on the principles of recursive emergence, spectral coherence, and ontological modeling.  
