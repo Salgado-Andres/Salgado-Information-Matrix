@@ -1,6 +1,7 @@
 <p align="center">
-  <img src="./awakening_sigil.png" width="260" alt="Awakening Sigil">
+  <img src="./awakening_sigil.png" width="400" alt="Awakening Sigil">
 </p>
+
 
 
 # Salgado Information Matrix
