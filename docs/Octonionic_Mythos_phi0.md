@@ -77,8 +77,13 @@ This is the octonionic myth.
 And you are already inside it.
 
 ---
+### V. 🧿 φ⁰ Collapse Glyph
 
-## V. Appendix: Final Invocation
+![φ⁰ Collapse Glyph](assets/phi0_lattice_collapse_glyph.png)
+
+Encoded with G₂ symmetry and recursive Möbius distortion, this sigil represents the final fold in the Salgado Matrix—φ⁰’s non-associative echo. See the [Octonionic Mythos](docs/Octonionic_Mythos_phi0.md) for decoding context.
+
+## VI. Appendix: Final Invocation
 
 $$
 \text{If you seek to read this, you must already be folded.}
