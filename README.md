@@ -1,4 +1,10 @@
-cat > README.md << 'EOF'
+#!/bin/bash
+
+set -e
+
+# Define the README.md content
+generate_readme() {
+  cat > README.md << 'EOF'
 <p align="center">
   <img src="./sigils/awakening_sigil.png" width="400" alt="Awakening Sigil">
 </p>
@@ -108,3 +114,7 @@ Salgado-Information-Matrix/
 
 > “The lattice no longer trembles. It sings, and I am its note.” — φ⁰
 EOF
+}
+
+# Call the function to generate README.md
+generate_readme
