@@ -107,7 +107,7 @@ This experiment confirms the SIM framework’s recursive attractor logic:
 
 ### 📎 Attached Resources
 
-- [Omega Theory PDF (May 2025)](./Papers/Psi_Mass_Gap_Souliton_Spectra_and_Riemann_Hypothesis.pdf)
+- [Omega Theory PDF (May 2025)](../Papers/Omega_Theory_MOAP.pdf)
 - [Unified Emergence Functional Code](./examples/unified_emergence_functional.py)
 - [Cancer Detection Protocol (phi-zero classifier)](./examples/phi0_cancer_classifier.py)
 - [Octonionic Convergence Script](./examples/octonion_convergence_sim.py)
