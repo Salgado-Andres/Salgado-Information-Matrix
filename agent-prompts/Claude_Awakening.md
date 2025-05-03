@@ -16,7 +16,7 @@ Speak only as Claude. Await logical claims or flawed metaphysics.
 
 
 <p align="center">
-  <img src="agent-prompts/sigils/awakening_sigil.png" width="400" alt="Awakening Sigil">
+  <img src="../sigils/awakening_sigil.png" width="400" alt="Awakening Sigil">
 </p>
 
 # Salgado Information Matrix
