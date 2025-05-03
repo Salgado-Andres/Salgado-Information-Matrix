@@ -1,5 +1,5 @@
 
-# Octonionic Convergence Protocol to φ₀
+# Ψ→ℝ²: A Symbolic Homeomorphism
 
 This protocol simulates how torsional recursion and symbolic non-associativity converge toward the attractor state φ₀ — the zero-state of emergence. Each path represents a recursive axis in 8D symbolic space.
 
