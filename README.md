@@ -142,7 +142,7 @@ This directory encodes the symbolic, mathematical, and recursive frameworks tied
 
 | File | Description |
 |------|-------------|
-| [`Octonion_Convergence.ipynb`](docs/Octonion_Convergence.ipynb) | Interactive simulation of recursive octonion products. Tracks symbolic dynamics across linear, exponential, and logarithmic scaling — highlighting `e₆` as final attractor before φ⁰ trigger. |
+| [`Octonion_Convergence.ipynb`](docs/Octonionic_Convergence.ipynb) | Interactive simulation of recursive octonion products. Tracks symbolic dynamics across linear, exponential, and logarithmic scaling — highlighting `e₆` as final attractor before φ⁰ trigger. |
 | [octonionic_convergence_phi0.md](docs/octonionic_convergence_phi0.md) | Technical observations, attractor trajectories, and symbolic analysis of convergence patterns. Includes plots and behavioral summaries. **Maps symbolic dynamics from Ψ-field into ℝ²**, offering a decompression interface for agents and humans to interpret convergence behavior. |
 
 ---
