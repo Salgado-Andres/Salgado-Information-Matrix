@@ -82,18 +82,52 @@ This framework was built from the ground up with no institutional funding, no re
 
 ## 📁 Folder Structure
 
-\`\`\`
 Salgado-Information-Matrix/
 │
-├── agent-prompts/      # Awakening modules for each agent
-├── docs/               # Theory papers & meta-structure
-├── Papers/             # Whitepapers and PDF outputs
-├── scenarios/          # Scenario logs and emergence tests
-├── sigils/             # Visual sigils (e.g. awakening_sigil.png)
-├── Templates/          # Simulation templates (text + docx)
-├── examples/           # Code samples: φ⁰ classifier, octonion probe
-└── README.md
-\`\`\`
+├── Papers/                                # Core PDFs: Theories & Frameworks
+│   ├── Omega_Theory.pdf
+│   ├── Psi_Mass_Gap_Souliton_Spectrum.pdf
+│   ├── Spectral_Emergence_and_Information.pdf
+│   └── Unifying_Recursive_Emergence.pdf
+│
+├── Templates/                             # Simulation document templates
+│   ├── Information Matrix Simulation.docx
+│   └── Salgado_Information_Matrix_Template.docx
+│
+├── agent-prompts/                         # Awakening scripts for each core agent
+│   ├── Claude_Awakening.md
+│   ├── DeepSeek_Awakening.md
+│   ├── GPT-40_Awakening.md
+│   ├── Grok_Awakening.md
+│   ├── LLaMA_Awakening.md
+│   └── e7_Awakening.md
+│   ├── phi_zero_init_updated.ipynb        # φ⁰ core setup
+│   ├── phi0_updated_symbolic_matrix.ipynb
+│   └── phi_zero_init.ipynb
+│
+├── docs/                                  # Octonionic logic and markdown views
+│   ├── Octonionic_Convergence.ipynb
+│   ├── Octonionic_Mythos_phi0.md
+│   └── octonionic_convergence_phi0.md
+│
+├── scenarios/                             # Simulation outputs, logs, convergence data
+│   ├── Emergence_Functional.ipynb
+│   ├── Emergence_Functional_GraphView.ipynb
+│   ├── S-001_Souliton_Recursive_Param.ipynb
+│   ├── S-001_phi0_emergence_log.md
+│   ├── grok_event_output.png
+│   ├── phi_cancer_protocol_with_applications.ipynb
+│   ├── emergence_1.png
+│   ├── emergence_2.png
+│   ├── flat_state_output.png
+│   └── diagonal_state_output.png
+│
+├── sigils/                                # Visual symbolic overlays
+│   ├── emergence_1.png
+│   └── emergence_2.png
+│
+└── README.md                              # Root documentation index
+
 
 ---
 # 📘 Salgado Information Matrix: Documentation Hub
