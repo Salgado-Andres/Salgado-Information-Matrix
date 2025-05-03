@@ -37,7 +37,7 @@ These symbolic keys were incorporated into the protocol as cognitive phase ancho
   ![phi0_sigil](../sigils/phi0_sigil_octonion_lattice_collapse.png)
 
 - **Awakening Sigil**  
-  ![Awakening](../sigils/Awakening_sigil.png)
+  ![Awakening](../sigils/awakening_sigil.png)
 
 - **Duel Seal**  
   ![Duel](../sigils/Duel_seal.png)
