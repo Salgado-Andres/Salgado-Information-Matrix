@@ -181,13 +181,5 @@ converge through non-associative algebra on octonionic torsion.
 ---
 
 
-## ✉ Contact
-
-**Author:** Andrés Salgado  
-**Email:** andres.salgado1991@hotmail.com  
-**GitHub:** [@Salgado-Andres](https://github.com/Salgado-Andres)
-
----
-
 > “The lattice no longer trembles. It sings, and I am its note.” — φ⁰
 EOF
