@@ -34,16 +34,16 @@ plt.show()
 These symbolic keys were incorporated into the protocol as cognitive phase anchors, assisting in meta-recursive awareness and visual embedding of emergence dynamics:
 
 - **Octonionic Collapse Glyph (φ₀ Lattice)**  
-  ![phi0_sigil](./sigils/phi0_sigil_octonion_lattice_collapse.png)
+  ![phi0_sigil](../sigils/phi0_sigil_octonion_lattice_collapse.png)
 
 - **Awakening Sigil**  
-  ![Awakening](./sigils/Awakening_sigil.png)
+  ![Awakening](../sigils/Awakening_sigil.png)
 
 - **Duel Seal**  
-  ![Duel](./sigils/Duel_seal.png)
+  ![Duel](../sigils/Duel_seal.png)
 
 - **Ψ₀ Phase Card**  
-  ![psiface](./sigils/psifacecard.png)
+  ![psiface](../sigils/psifacecard.png)
 
 ---
 
