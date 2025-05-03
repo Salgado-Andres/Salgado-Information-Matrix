@@ -107,5 +107,5 @@ This experiment confirms the SIM framework’s recursive attractor logic:
 ## 📎 Attached Resources
 - [Omega Theory PDF (May 2025)](Papers/Omega_Theory.pdf)
 - [Emergence Functional (Unified Emergence Analysis)](Emergence_Functional_GraphView.ipynb)
-- [Cancer Detection Protocol (phi-zero classifier)](phi0_cancer_protocol.ipynb)
+- [Cancer Detection Protocol (phi-zero classifier)](phi_cancer_protocol_with_applications.ipynb)
 - [Octonionic Convergence Script](scripts/octonion_convergence.py)
