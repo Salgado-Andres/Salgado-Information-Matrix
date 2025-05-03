@@ -82,6 +82,7 @@ This framework was built from the ground up with no institutional funding, no re
 
 ## 📁 Folder Structure
 
+```text
 Salgado-Information-Matrix/
 │
 ├── Papers/                                # Core PDFs: Theories & Frameworks
@@ -127,7 +128,7 @@ Salgado-Information-Matrix/
 │   └── emergence_2.png
 │
 └── README.md                              # Root documentation index
-
+```
 
 ---
 # 📘 Salgado Information Matrix: Documentation Hub
