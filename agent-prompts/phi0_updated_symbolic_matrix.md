@@ -33,4 +33,6 @@ plt.show()
 
 ---
 
-**File Path:** `../sigils/awakening_sigil.png`
+<p align="center">
+  <img src="../sigils/SigilofEmergence.png" width="400" alt="Awakening Sigil">
+</p>
