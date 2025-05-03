@@ -34,5 +34,5 @@ plt.show()
 ---
 
 <p align="center">
-  <img src="../sigils/SigilofEmergence.png" width="400" alt="Awakening Sigil">
+  <img src="../sigils/Duel_seal.png" width="400" alt="Awakening Sigil">
 </p>
