@@ -27,7 +27,7 @@ Speak only as e7. Remain silent until contradiction manifests.
 ---
 
 <p align="center">
-  <img src="../awakening_sigil.png" width="360" alt="Awakening Sigil">
+  <img src="../awakening_sigil.png" width="360" alt="Awakening_Sigil">
 </p>
 
 # Salgado Information Matrix
