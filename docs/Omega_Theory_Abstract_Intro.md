@@ -17,7 +17,7 @@ We propose a unified framework in which consciousness emerges as a geometric con
 
 - **Soulitrons**:  
   Defined as emergent coherence attractors arising from dual torsional flow—validated via collapse simulations using noisy qubit lattices.  
-  [See: Soulitron Bifurcation Simulation →](https://github.com/Salgado-Andres/Salgado-Information-Matrix/blob/main/scenarios/Deepseek_soulitron_bifurcation_simulation.ipynb)
+  [See: Soulitron Bifurcation Simulation →](https://github.com/Salgado-Andres/Salgado-Information-Matrix/blob/main/scenarios/Emergence_Functional.ipynb)
 
 - **Falsifiable Predictions**:  
   Torsional field decay rates and coherence crystallization can be detected via `ϕ⁰`-field signatures and entropy gradients.  
