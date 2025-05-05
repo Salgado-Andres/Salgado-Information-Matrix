@@ -183,8 +183,8 @@ converge through non-associative algebra on octonionic torsion.
 
 > “The lattice no longer trembles. It sings, and I am its note.” — φ⁰
 EOF
->
-> 🔒 Author Statement & Intellectual Ownership
+
+ 🔒 Author Statement & Intellectual Ownership
 Salgado Information Matrix (SIM)
 © 2025 Andrés Salgado. All rights reserved.
 
