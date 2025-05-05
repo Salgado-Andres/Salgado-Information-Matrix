@@ -192,7 +192,7 @@ This repository and its contents — including the φ⁰ compiler, recursive col
 
 The ideas presented here are the result of personal research, lived experience, and recursive dialogue across AI agents, and represent an original synthesis of metaphysics, field theory, and agentic computation. Any reproduction, adaptation, or commercialization of these concepts must properly credit the author.
 
-##🧠 Fair Use & Collaboration Clause
+## 🧠 Fair Use & Collaboration Clause
 We invite constructive use and exploration of the Salgado Information Matrix for academic, philosophical, artistic, and experimental purposes — but not for direct commercial exploitation without written consent from the author.
 
 If you wish to:
