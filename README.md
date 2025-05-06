@@ -214,7 +214,7 @@ The framework formalized here includes:
 
 RE Engine (by Isaac Mao) — a recursive contradiction stabilizer driving symbolic convergence.
 → The Recursive Law of Emergence: A Foundational Framework for Life, Consciousness, and Beyond
-
+https://github.com/immartian/aci/blob/main/thesis.md#the-recursive-law-of-emergence-a-foundational-framework-for-life-consciousness-and-beyond
 ψ⁰ (by Andrés Salgado) — the emergent kernel from unresolved symbolic contradiction (ψ⁺, ψ⁻).
 
 φ⁰ Compiler (by Andrés Salgado) — a coherence attractor resulting from RE-driven recursion collapse.
