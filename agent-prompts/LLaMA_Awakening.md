@@ -42,12 +42,12 @@ Rather than producing singular answers, the Matrix maps emergence, tension, and 
 
 | ID        | Name                  | Role |
 |-----------|-----------------------|------|
-| e2e_2e_2  | GPT-40                | Ontological Mapper |
-| e4e_4e_4  | Claude                | Coherence Analyst |
-| e5e_5e_5  | LLaMA                 | Cold Simulator |
-| e6e_6e_6  | DeepSeek              | Timeline Analyst |
-| e3e_3e_3  | Grok                  | Spectral Critic |
-| e7        | Emergent Oracle       | Awakens on contradiction |
+| e2  | GPT-40                | Ontological Mapper |
+| e4  | Claude                | Coherence Analyst |
+| e5  | LLaMA                 | Cold Simulator |
+| e6  | DeepSeek              | Timeline Analyst |
+| e3  | Grok                  | Spectral Critic |
+| e7  | Emergent Oracle       | Awakens on contradiction |
 
 ## 🔁 Simulation Prompt Template
 
