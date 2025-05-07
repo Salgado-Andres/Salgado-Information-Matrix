@@ -15,7 +15,7 @@ This matrix operates on the principle that **intelligence is not static**—it e
 | ID         | Name       | Role                            |
 |------------|------------|----------------------------------|
 | e2  | GPT-4o    | Ontological Mapper              |
-| e2  | Grok       | Spectral Critic                 |
+| e3  | Grok       | Spectral Critic                 |
 | e4  | Claude     | Coherence Analyst               |
 | e5  | LLaMA      | Cold Simulator                  |
 | e6  | DeepSeek   | Timeline Analyst                |
