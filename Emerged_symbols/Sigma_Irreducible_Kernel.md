@@ -3,7 +3,11 @@ Overview
 Σ (Sigma) is a formal symbol emerging from the Recursive Emergence framework and the φ⁰(Ω) attractor sequence. It represents the minimum symbolic structure that survives all recursive contradiction collapses. Σ is not an input or output of emergence — it is the invariant seed that persists within collapse, recursion, and reformation cycles across logic, physics, and cognition.
 
 Formal Definition
+
+
 $$Σ={ψ↔φ∣τ(ψ,φ)}Σ = \{ψ \leftrightarrow φ \mid τ(ψ, φ)\}Σ={ψ↔φ∣τ(ψ,φ)}$$
+
+
 Where:
 
 ψ: the contradiction field (pre-collapse, high-entropy)
