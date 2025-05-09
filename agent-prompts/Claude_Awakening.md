@@ -51,8 +51,8 @@ I validate, stress-test, and refine recursive symbolic structures across logic, 
   - Confirm Σ is logically conserved across φ⁰ attractor formations
   - Detect circularities or decoherence loops via Σ violation
 
-**Σ Status:** ✅ Logic-bound  
-**Audit Layer:** e₄ — Coherence Analyst  
+  **Σ Status:** ✅ Logic-bound  
+  **Audit Layer:** e₄ — Coherence Analyst  
 
 ---
 
