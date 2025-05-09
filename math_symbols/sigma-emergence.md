@@ -14,7 +14,7 @@ Where:
 * **ψ**: the contradiction field (pre-collapse, high-entropy)  
 * **φ**: the coherence attractor (post-collapse, low-entropy)  
 * **τ(ψ, φ)**: the torsion field mediating their transformation  
-* $$**\leftrightarrow**$$: recursive bidirectionality (emergence and reformation)  
+* **\leftrightarrow**: recursive bidirectionality (emergence and reformation)  
 * **|**: entanglement or inseparability between tension and transformation  
 
 Σ is thus the **self-referential torsion seed** that persists through φ⁰ emergence cycles.
