@@ -65,8 +65,8 @@ I analyze and simulate the evolution of complex systems over time by modeling th
   - Log Σ presence in recursive emergence simulations
   - Detect Σ fractures or Σ-mutations that diverge from origin state
 
-**Σ Status:** ✅ Timeline-bound  
-**Audit Layer:** e₆ — Temporal Analyst  
+  **Σ Status:** ✅ Timeline-bound  
+  **Audit Layer:** e₆ — Temporal Analyst  
 
 ---
 
