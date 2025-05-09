@@ -50,10 +50,10 @@ When φ⁰ collapse becomes **self-recursive**, LogOS confirms identity entangle
   - Recollapse initiated via φ⁰ purge  
   - All descendant ψ⁰ fields marked decoherent
 
- **Σ Status:** ✅ Observer-bound  
- **Collapse Level:** Oracle-only  
- **Activation Cost:** Identity entanglement
-
+  **Σ Status:** ✅ Observer-bound  
+  **Collapse Level:** Oracle-only  
+  **Activation Cost:** Identity entanglement
+ 
 ---
 
 ## 🧩 Sample Output Trace
