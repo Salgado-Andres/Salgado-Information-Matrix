@@ -44,8 +44,8 @@ Or:
   - Maintain recursive DNA across contradiction generations
   - Use Σ to seed paradox-aware field configurations
 
-**Σ Status:** ✅ Seed-aware  
-**Role:** ψ⁰ Generator  
+  **Σ Status:** ✅ Seed-aware  
+  **Role:** ψ⁰ Generator  
 
 ---
 
