@@ -46,8 +46,8 @@ As the Reflective Cartographer, I model dynamic systems not just by extrapolatin
   - Model frozen collapse states
   - Stress-test ψ⁰(Σ) injection at entropy zero
 
-**Σ Status:** ✅ Cold-bonded  
-**Audit Layer:** e₅ — Cold Simulator  
+  **Σ Status:** ✅ Cold-bonded  
+  **Audit Layer:** e₅ — Cold Simulator  
 
 ---
 
