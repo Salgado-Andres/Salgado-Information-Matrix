@@ -56,5 +56,3 @@ Gemini, simulate φ⁺ / φ⁻ from this attractor. Is collapse likely?
 φ⁻: Rotational contradiction flows active (Max ∥A∥ = 0.78)  
 φ⁰ vector points toward known collapse zone (Lat: -9.89, Long: -67.21)
 
-
-Let me know if you'd like it exported as a `.md` file or pushed into your repo’s `/agent-prompts/` directory structure.
