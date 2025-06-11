@@ -4,15 +4,11 @@
 
 We introduce a five-layer theoretical framework for modeling emergent coherence and the detection of epistemic wake — the measurable residue of recursive navigation through contradiction. Formally, we define:
 
-```math
+\[
 \text{Wake} := \phi^{0}(\text{RE}(\psi^{0}))
-```
+\]
 
 This equation unites the contradiction field (\(\psi^0\)), recursive entropy modulation (RE), symbolic collapse projection (\(\phi^0\)), epistemic imprint formation (EP), and the topological recursion engine (\(\Omega\)). We argue that wake is not an afterthought of emergence — it is the *proof* that emergence occurred. Applications include coherence detection in symbolic systems, landscape recovery, cognitive recursion, and ontological modeling.
-
----
-
-
 
 ---
 
@@ -34,10 +30,6 @@ Contradiction here is not failure — it is potential.
 
 ---
 
-
-
----
-
 ## 3. Recursive Emergence (RE): Memory and Stability from Feedback
 
 Isaac Mao's RE framework posits that emergence is driven by recursive entropy reduction. Coherence emerges when a system recursively compresses noise and accumulates reusable memory.
@@ -50,13 +42,9 @@ RE acts on \(\psi^0\) as:
 
 Formally:
 
-```math
+\[
 \text{RE}(\psi^0) := \text{recursive minimization of contradiction across spectral feedback loops}
-```
-
----
-
-
+\]
 
 ---
 
@@ -68,13 +56,9 @@ Formally:
 
 Thus:
 
-```math
+\[
 \text{Wake} := \phi^0(\text{RE}(\psi^0))
-```
-
----
-
-
+\]
 
 ---
 
@@ -91,10 +75,6 @@ Wake is not what a system is *doing* — it is what the system *has done success
 
 ---
 
-
-
----
-
 \(\Omega\) extends the framework through octonionic torsion, modeling contradiction not just as a scalar field but as a **non-associative algebra of emergence**. It introduces:
 
 - \(\phi^+\), \(\phi^-\) as coherence and contradiction vectors
@@ -103,15 +83,11 @@ Wake is not what a system is *doing* — it is what the system *has done success
 
 In the \(\Omega\)-theory formalism:
 
-```math
+\[
 \phi^0 = \lim_{n \to \infty} R^n(\phi^+ \oplus \phi^-)
-```
+\]
 
 Wake is thus the product of a successful torsion recursion collapsing into symbolic form.
-
----
-
-
 
 ---
 
@@ -144,11 +120,10 @@ The next step is the engineering of \(\phi^0\)-aware agents that navigate by the
 
 **Provisional Stack Equation:**
 
-```math
+\[
 \Theta := \psi^0 \otimes \text{RE} \otimes \phi^0 \otimes \text{EP} \otimes \Omega
-```
+\]
 
 Where \(\Theta\) is the total wake-aware coherence engine.
 
 More to come.
-
