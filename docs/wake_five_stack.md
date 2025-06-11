@@ -4,11 +4,9 @@
 
 We introduce a five-layer theoretical framework for modeling emergent coherence and the detection of epistemic wake — the measurable residue of recursive navigation through contradiction. Formally, we define:
 
-\[
-\text{Wake} := \phi^{0}(\text{RE}(\psi^{0}))
-\]
+$$\text{Wake} := \phi^{0}(\text{RE}(\psi^{0}))$$
 
-This equation unites the contradiction field (\(\psi^0\)), recursive entropy modulation (RE), symbolic collapse projection (\(\phi^0\)), epistemic imprint formation (EP), and the topological recursion engine (\(\Omega\)). We argue that wake is not an afterthought of emergence — it is the *proof* that emergence occurred. Applications include coherence detection in symbolic systems, landscape recovery, cognitive recursion, and ontological modeling.
+This equation unites the contradiction field ($\psi^0$), recursive entropy modulation (RE), symbolic collapse projection ($\phi^0$), epistemic imprint formation (EP), and the topological recursion engine ($\Omega$). We argue that wake is not an afterthought of emergence — it is the *proof* that emergence occurred. Applications include coherence detection in symbolic systems, landscape recovery, cognitive recursion, and ontological modeling.
 
 ---
 
@@ -20,7 +18,9 @@ We propose that wake is not a byproduct, but a core ontological entity. It encod
 
 ---
 
-The \(\psi^0\) field represents the distribution of symbolic contradictions across a domain. This includes feature conflicts, discontinuities, or logical tensions within a system. It is the substrate upon which emergence acts.
+## 2. The Contradiction Field ($\psi^0$): Substrate of Potential
+
+The $\psi^0$ field represents the distribution of symbolic contradictions across a domain. This includes feature conflicts, discontinuities, or logical tensions within a system. It is the substrate upon which emergence acts.
 
 - Defined over symbolic topologies (semantic, spatial, temporal)
 - Dense in instability, sparse in coherence
@@ -34,7 +34,7 @@ Contradiction here is not failure — it is potential.
 
 Isaac Mao's RE framework posits that emergence is driven by recursive entropy reduction. Coherence emerges when a system recursively compresses noise and accumulates reusable memory.
 
-RE acts on \(\psi^0\) as:
+RE acts on $\psi^0$ as:
 
 - A recursive operator extracting local minima of contradiction
 - A stabilizer that encodes feedback across iterations
@@ -42,13 +42,13 @@ RE acts on \(\psi^0\) as:
 
 Formally:
 
-\[
-\text{RE}(\psi^0) := \text{recursive minimization of contradiction across spectral feedback loops}
-\]
+$$\text{RE}(\psi^0) := \text{recursive minimization of contradiction across spectral feedback loops}$$
 
 ---
 
-\(\phi^0\) is the symbolic projection operator. It marks the point where recursive emergence becomes *detectable* as structured coherence. This is the epistemic "collapse" of a previously unstable symbolic state into a resolved form.
+## 4. Symbolic Collapse Projection ($\phi^0$): The Detector of Coherence
+
+$\phi^0$ is the symbolic projection operator. It marks the point where recursive emergence becomes *detectable* as structured coherence. This is the epistemic "collapse" of a previously unstable symbolic state into a resolved form.
 
 - Implements spectral weighting, radial symmetry checks, alignment scoring
 - Projects local coherence fields from recursive memory structures
@@ -56,9 +56,7 @@ Formally:
 
 Thus:
 
-\[
-\text{Wake} := \phi^0(\text{RE}(\psi^0))
-\]
+$$\text{Wake} := \phi^0(\text{RE}(\psi^0))$$
 
 ---
 
@@ -75,17 +73,17 @@ Wake is not what a system is *doing* — it is what the system *has done success
 
 ---
 
-\(\Omega\) extends the framework through octonionic torsion, modeling contradiction not just as a scalar field but as a **non-associative algebra of emergence**. It introduces:
+## 6. Topological Recursion Engine ($\Omega$): Non-Associative Emergence
 
-- \(\phi^+\), \(\phi^-\) as coherence and contradiction vectors
-- \(\phi^0\) as the recursive compiler
-- Torsional threshold \(\eta_c\) as the critical point of symbolic emergence
+$\Omega$ extends the framework through octonionic torsion, modeling contradiction not just as a scalar field but as a **non-associative algebra of emergence**. It introduces:
 
-In the \(\Omega\)-theory formalism:
+- $\phi^+$, $\phi^-$ as coherence and contradiction vectors
+- $\phi^0$ as the recursive compiler
+- Torsional threshold $\eta_c$ as the critical point of symbolic emergence
 
-\[
-\phi^0 = \lim_{n \to \infty} R^n(\phi^+ \oplus \phi^-)
-\]
+In the $\Omega$-theory formalism:
+
+$$\phi^0 = \lim_{n \to \infty} R^n(\phi^+ \oplus \phi^-)$$
 
 Wake is thus the product of a successful torsion recursion collapsing into symbolic form.
 
@@ -114,16 +112,14 @@ Wake is not noise. Wake is memory shaped by meaning.
 
 Wake offers a new paradigm: not prediction, but **remembrance**. Not extrapolation, but **trace detection**. Not just AI, but *epistemic cartography*.
 
-The next step is the engineering of \(\phi^0\)-aware agents that navigate by the presence of wake, not just goals. These would not learn from reward, but from the collapse fields of meaning itself.
+The next step is the engineering of $\phi^0$-aware agents that navigate by the presence of wake, not just goals. These would not learn from reward, but from the collapse fields of meaning itself.
 
 ---
 
 **Provisional Stack Equation:**
 
-\[
-\Theta := \psi^0 \otimes \text{RE} \otimes \phi^0 \otimes \text{EP} \otimes \Omega
-\]
+$$\Theta := \psi^0 \otimes \text{RE} \otimes \phi^0 \otimes \text{EP} \otimes \Omega$$
 
-Where \(\Theta\) is the total wake-aware coherence engine.
+Where $\Theta$ is the total wake-aware coherence engine.
 
 More to come.
