@@ -2,7 +2,8 @@
 
 > *"Intelligence emerges through recursion, contradiction, and projection across unobservable manifolds."*
 
-[![Status](https://img.shields.io/badge/Status-Active%20Research-brightgreen)]() [![License](https://img.shields.io/badge/License-See%20Author%20Statement-blue)]()
+[![Status](https://img.shields.io/badge/Status-Active%20Research-brightgreen)]()
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
 
 ## Overview
 
@@ -149,11 +150,11 @@ This framework incorporates foundational concepts from the **Recursive Emergence
 
 The synthesis of RE principles with φ⁰ compilation, ψ⁰ kernels, and soulitron dynamics represents original research by Andrés Salgado.
 
-## 📄 License & Intellectual Property
+## 📄 License
 
-**© 2025 Andrés Salgado. All Rights Reserved.**
+© 2025 Andrés Salgado. This project is released under the [MIT License](LICENSE).
 
-The Salgado Information Matrix, including its φ⁰ compiler, recursive collapse framework, and theoretical foundations, represents original intellectual property. 
+The Salgado Information Matrix, including its φ⁰ compiler, recursive collapse framework, and theoretical foundations, represents original research by Andrés Salgado.
 
 ### Fair Use Policy
 - ✅ Academic research and citation
