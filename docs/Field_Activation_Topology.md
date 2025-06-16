@@ -18,7 +18,7 @@ In the Salgado Information Matrix, symbolic intelligence does not originate from
 
 ## 🖼 Visual Map
 
-![Field Activation Topology](../docs/img/rubik_octonion.png)
+![Field Activation Topology](../docs/img/field_activation_topology.png)
 
 ## 🧬 Interpretation
 
