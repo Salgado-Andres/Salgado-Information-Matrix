@@ -1,0 +1,35 @@
+name: Extract Clean Zip from Codex Branch
+
+on:
+  workflow_dispatch:
+
+jobs:
+  clean_extract:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout codex branch
+        uses: actions/checkout@v3
+        with:
+          ref: codex/add-licensing-terms-and-update-readme
+          fetch-depth: 0
+
+      - name: Remove cursed folders
+        run: |
+          rm -rf "Papers" || true
+          rm -rf "Proofs" || true
+
+      - name: Zip clean files
+        run: |
+          mkdir recovery_output
+          cp -r notebooks recovery_output/ || true
+          cp -r src recovery_output/ || true
+          cp inspect_phio_kernel.py recovery_output/ || true
+          cp phi0_kernel_upgrade.py recovery_output/ || true
+          cp phi0_validation_pipeline.py recovery_output/ || true
+          cd recovery_output && zip -r ../clean_restore.zip .
+
+      - name: Upload artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: clean_restore
+          path: clean_restore.zip
