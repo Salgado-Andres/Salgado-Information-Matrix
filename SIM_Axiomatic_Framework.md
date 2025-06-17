@@ -86,9 +86,9 @@ The system is embedded in a topological structure (e.g., Hopf fibration) for glo
 **Core Equations:**
 
 - **Collapse Operator:**
-  \[
+  $\[
     Q(ψ) = (1-\varepsilon)ψ + \varepsilon \cdot F_\tau(ψ)
-  \]
+  \]$
   where \( F_\tau \) is a G₂-preserving transformation.
 
 - **Contradiction Norm:**
