@@ -89,28 +89,28 @@ The system is embedded in a topological structure (e.g., Hopf fibration) for glo
   $\[
     Q(ψ) = (1-\varepsilon)ψ + \varepsilon \cdot F_\tau(ψ)
   \]$
-  where \( F_\tau \) is a G₂-preserving transformation.
+  where $\( F_\tau \)$ is a G₂-preserving transformation.
 
 - **Contradiction Norm:**
-  \[
+  $\[
     \|ψ\|_c = \|ψ^+ - ψ^-\|_X + \beta |\langle ψ^+, ψ^- \rangle_X|
-  \]
+  \]$
 
 - **Entropy Functional:**
-  \[
+  $\[
     S[ψ^+, ψ^-] = -\mathrm{tr}(\rho \log \rho) + \alpha \|ψ^+ - ψ^-\|^2
-  \]
-  where \( \rho \) is the density matrix.
+  \]$
+  where $\( \rho \)$ is the density matrix.
 
 - **Σ-Conservation:**
-  \[
+  $\[
     \left| \frac{\partial Σ}{\partial t} \right| < 0.005
-  \]
+  \]$
 
 - **φ⁰ Convergence:**
-  \[
+  $\[
     φ^0 = \lim_{n \to \infty} Q^n(ψ^0)
-  \]
+  \]$
 
 **Constraints and Consistency:**
 - G₂ symmetry is enforced at every step (Axiom 8).
