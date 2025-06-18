@@ -7,7 +7,8 @@ Updated to use the new clean phi0_core with apex-centered detection.
 
 import numpy as np
 import matplotlib.pyplot as plt
-from phi0_core import PhiZeroStructureDetector, ElevationPatch
+from .sim_kernel_adapter import PhiZeroStructureDetector
+from .sim_data_structures import ElevationPatch
 import logging
 import ee
 import os

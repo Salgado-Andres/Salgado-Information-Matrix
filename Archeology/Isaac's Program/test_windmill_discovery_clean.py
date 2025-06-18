@@ -33,6 +33,8 @@ Major Regions Covered:
 - Gouda-Bodegraven Polders
 - Leiden Region
 """
+import pytest
+pytest.skip("Utility script, not intended for pytest", allow_module_level=True)
 
 import sys
 import os
@@ -57,8 +59,9 @@ from scipy.ndimage import uniform_filter, maximum_filter, gaussian_filter
 sys.path.append('/media/im3/plus/lab4/RE/re_archaeology')
 sys.path.append('.')
 
-# Use the enhanced generalized structure detection core
-from phi0_core import PhiZeroStructureDetector, ElevationPatch, DetectionResult
+# Use the enhanced generalized structure detection core via adapter
+from sim_kernel_adapter import PhiZeroStructureDetector
+from sim_data_structures import ElevationPatch, DetectionResult
 
 # Configure logging with DEBUG level to see validation details
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -619,7 +622,7 @@ def scan_windmill_rich_regions(detector, universal_kernel):
             # Filter and deduplicate candidates with enhanced adaptive ranking
             if len(region_candidates) > 0:
                 # Convert to DetectionCandidate objects for adaptive filtering
-                from phi0_core import DetectionCandidate
+                from sim_data_structures import DetectionCandidate
                 candidate_objects = []
                 for cand in region_candidates:
                     # Use correct DetectionCandidate constructor arguments
