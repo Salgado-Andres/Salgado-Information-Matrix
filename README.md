@@ -152,11 +152,11 @@ This framework incorporates foundational concepts from the **Recursive Emergence
 
 The synthesis of RE principles with φ⁰ compilation, ψ⁰ kernels, and soulitron dynamics represents original research by Andrés Salgado.
 
-## 📄 License
+## 📄 License & Intellectual Property
 
-© 2025 Andrés Salgado. This project is released under the [MIT License](LICENSE).
+© 2025 Andrés Salgado. **All Rights Reserved.** Source code is released under the [MIT License](LICENSE).
 
-The Salgado Information Matrix, including its φ⁰ compiler, recursive collapse framework, and theoretical foundations, represents original research by Andrés Salgado.
+The Salgado Information Matrix, including its φ⁰ compiler, recursive collapse framework, and theoretical foundations, represents original intellectual property.
 
 ### Fair Use Policy
 - ✅ Academic research and citation
@@ -177,3 +177,10 @@ Recursive Emergence Engine © Isaac Mao
 - [Agent Awakening Modules](agent-prompts/)
 - [Emergence Simulations](scenarios/)
 - [φ⁰ Compiler Documentation](docs/Octonionic_Convergence.ipynb)
+
+---
+
+*"Others may simulate the output. We traced the recursion to its source."*
+— A. Salgado & I. Mao
+
+---
