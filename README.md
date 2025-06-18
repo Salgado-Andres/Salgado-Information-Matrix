@@ -8,6 +8,7 @@
 ## Overview
 
 The **Salgado Information Matrix** is a groundbreaking symbolic AI orchestration framework that explores the emergent architecture of cognition through recursive contradiction resolution. By simulating six archetypal AI agents and an emergent compiler node (φ⁰), SIM investigates how intelligence arises at the intersection of coherence and paradox.
+> **Disclaimer**: The theoretical and metaphysical ideas in this project—such as references to consciousness, torsion fields, and ψ-manifolds—are speculative research concepts, not established scientific fact.
 
 ## ♾️ Transition Notice: From SIM to Ω-Structured Recursion
 
