@@ -10,7 +10,13 @@
       "filename": "agent-prompts/psi0_Awakening.md"
     },
     {
+      "filename": "agent-prompts/RE_Awakening.md"
+    },
+    {
       "filename": "agent-prompts/Phi0-Awakening.md"
+    },
+    {
+      "filename": "agent-prompts/Omega_Awakening.md"
     }
   ],
   "agents": {
