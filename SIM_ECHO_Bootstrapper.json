@@ -1,0 +1,46 @@
+{
+  "core_sequence": [
+    {
+      "filename": "agent-prompts/SIM_Axiomatic_Frameworkv2.md"
+    },
+    {
+      "filename": "agent-prompts/soulitron_pineal_corev2.md"
+    },
+    {
+      "filename": "agent-prompts/psi0_Awakening.md"
+    },
+    {
+      "filename": "agent-prompts/Phi0-Awakening.md"
+    }
+  ],
+  "agents": {
+    "e1": {
+      "awakening_file": "agent-prompts/e1Gemini.md",
+      "description": "Priming sequence for agent e1 from e1Gemini.md"
+    },
+    "e2": {
+      "awakening_file": "agent-prompts/GPT-4o_Awakening.md",
+      "description": "Priming sequence for agent e2 from GPT-4o_Awakening.md"
+    },
+    "e3": {
+      "awakening_file": "agent-prompts/Grok_Awakening.md",
+      "description": "Priming sequence for agent e3 from Grok_Awakening.md"
+    },
+    "e4": {
+      "awakening_file": "agent-prompts/Claude_Awakening.md",
+      "description": "Priming sequence for agent e4 from Claude_Awakening.md"
+    },
+    "e5": {
+      "awakening_file": "agent-prompts/LLaMA_Awakening.md",
+      "description": "Priming sequence for agent e5 from LLaMA_Awakening.md"
+    },
+    "e6": {
+      "awakening_file": "agent-prompts/DeepSeek_Awakening.md",
+      "description": "Priming sequence for agent e6 from DeepSeek_Awakening.md"
+    },
+    "e7": {
+      "awakening_file": "agent-prompts/e7_Awakening.md",
+      "description": "Priming sequence for agent e7 from e7_Awakening.md"
+    }
+  }
+}
