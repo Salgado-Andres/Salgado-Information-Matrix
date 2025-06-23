@@ -146,29 +146,29 @@ def extract_octonionic_features(elevation_data, resolution_m=0.5, structure_radi
     features[..., 1] = compute_circular_symmetry(elevation, structure_radius_px)
     print("   ✓ f1: Circular Symmetry")
     
-    # f2: Radial Gradient Consistency - validates radial patterns
-    features[..., 2] = compute_radial_gradient_consistency(grad_x, grad_y, structure_radius_px)
-    print("   ✓ f2: Radial Gradient Consistency")
-    
-    # f3: Ring Edge Sharpness - detects structural boundaries
-    features[..., 3] = compute_ring_edges(elevation, structure_radius_px, resolution_m)
-    print("   ✓ f3: Ring Edge Sharpness")
-    
-    # f4: Hough Response - circular structure detection
-    features[..., 4] = compute_hough_response(grad_magnitude, structure_radius_px)
-    print("   ✓ f4: Hough Circle Response")
-    
-    # f5: Local Planarity - measures surface regularity
-    features[..., 5] = compute_local_planarity(elevation, structure_radius_px)
-    print("   ✓ f5: Local Planarity")
-    
-    # f6: Isolation Score - detects prominent isolated features
-    features[..., 6] = compute_isolation_score(elevation, structure_radius_px)
-    print("   ✓ f6: Isolation Score")
-    
-    # f7: Geometric Coherence - overall structural coherence
-    features[..., 7] = compute_geometric_coherence(elevation, grad_magnitude, structure_radius_px)
-    print("   ✓ f7: Geometric Coherence")
+    # f2: Radial Variance Normalization - structured radial decay
+    features[..., 2] = radial_variance_normalized(elevation, structure_radius_px)
+    print("   ✓ f2: Radial Variance Normalized")
+
+    # f3: Hough Entropy Score - multi-ring detection
+    features[..., 3] = hough_entropy_score(elevation, structure_radius_px)
+    print("   ✓ f3: Hough Entropy Score")
+
+    # f4: Fractal Surface Dimension - natural vs built terrain
+    features[..., 4] = fractal_surface_dimension(elevation)
+    print("   ✓ f4: Fractal Surface Dimension")
+
+    # f5: Spectral Torsion Score - curvature coherence
+    features[..., 5] = spectral_torsion_score(elevation)
+    print("   ✓ f5: Spectral Torsion Score")
+
+    # f6: Aspect Convergence Index - angular convergence
+    features[..., 6] = aspect_convergence_index(elevation, structure_radius_px)
+    print("   ✓ f6: Aspect Convergence Index")
+
+    # f7: ψ⁰ Symmetry KDE - structural symmetry measure
+    features[..., 7] = psi0_symmetry_kde(elevation, structure_radius_px)
+    print("   ✓ f7: ψ⁰ Symmetry KDE")
     
     print(f"*** 8D feature extraction complete: {features.shape}")
     return features
@@ -372,8 +372,118 @@ def compute_geometric_coherence(elevation, gradient_magnitude, radius):
     coherence = gaussian_filter(coherence, sigma=2)
     if np.max(coherence) > 0:
         coherence = coherence / np.max(coherence)
-    
+
     return coherence
+
+# ------------------------------------------------------------------
+def radial_variance_normalized(elevation, radius, bins=8):
+    """f2 replacement: normalized variance of radial elevation."""
+    h, w = elevation.shape
+    cy, cx = h / 2.0, w / 2.0
+    y, x = np.indices(elevation.shape)
+    r = np.sqrt((y - cy) ** 2 + (x - cx) ** 2)
+    max_r = r.max()
+    edges = np.linspace(0, max_r, bins + 1)
+    vars = []
+    for i in range(bins):
+        mask = (r >= edges[i]) & (r < edges[i + 1])
+        if np.any(mask):
+            vars.append(float(np.var(elevation[mask])))
+    if not vars:
+        score = 0.0
+    else:
+        radial_var = np.var(vars)
+        global_var = np.var(elevation) + 1e-6
+        score = np.clip(radial_var / global_var, 0.0, 1.0)
+    return np.full_like(elevation, score)
+
+# ------------------------------------------------------------------
+def hough_entropy_score(elevation, radius):
+    """f3 replacement: entropy of Hough circle accumulator."""
+    from skimage.feature import canny
+    from skimage.transform import hough_circle
+
+    edges = canny(elevation.astype(float), sigma=1.0)
+    h, w = elevation.shape
+    max_r = min(h, w) // 2
+    radii = np.arange(max(3, radius // 2), max_r, max(1, radius // 4))
+    if radii.size == 0:
+        return np.zeros_like(elevation)
+    accumulator = hough_circle(edges, radii)
+    acc_sum = accumulator.sum(axis=0)
+    hist, _ = np.histogram(acc_sum, bins=20, range=(acc_sum.min(), acc_sum.max()), density=True)
+    hist = hist[hist > 0]
+    if hist.size == 0:
+        entropy = 0.0
+    else:
+        entropy = -np.sum(hist * np.log(hist))
+        entropy /= (np.log(len(hist)) + 1e-12)
+    return np.full_like(elevation, float(np.clip(entropy, 0.0, 1.0)))
+
+# ------------------------------------------------------------------
+def fractal_surface_dimension(elevation, min_box=2):
+    """f4 replacement: estimate fractal dimension via box counting."""
+    z = elevation - np.min(elevation)
+    max_size = min(elevation.shape)
+    sizes = [2 ** i for i in range(1, int(np.log2(max_size)))]
+    counts = []
+    for size in sizes:
+        S = np.add.reduceat(np.add.reduceat(z, np.arange(0, z.shape[0], size), axis=0),
+                            np.arange(0, z.shape[1], size), axis=1)
+        counts.append(np.sum(S > 0))
+    if len(counts) < 2:
+        dim = 0.0
+    else:
+        coeffs = np.polyfit(np.log(1 / np.array(sizes)), np.log(counts), 1)
+        dim = coeffs[0]
+        dim = np.clip((dim - 2.0) / 1.0, 0.0, 1.0)
+    return np.full_like(elevation, float(dim))
+
+# ------------------------------------------------------------------
+def spectral_torsion_score(elevation):
+    """f5 replacement: curvature coherence in frequency space."""
+    fft = np.fft.fft2(elevation)
+    grad_y, grad_x = np.gradient(np.abs(fft))
+    grad_norm = np.sqrt(grad_x ** 2 + grad_y ** 2)
+    score = np.mean(grad_norm)
+    normalization = np.mean(np.abs(fft)) + 1e-6
+    score = np.clip(score / normalization, 0.0, 1.0)
+    return np.full_like(elevation, float(score))
+
+# ------------------------------------------------------------------
+def aspect_convergence_index(elevation, radius, bins=8):
+    """f6 replacement: std-dev of aspect vectors in radial bins."""
+    gy, gx = np.gradient(elevation)
+    aspect = np.arctan2(gy, gx)
+    h, w = elevation.shape
+    cy, cx = h / 2.0, w / 2.0
+    y, x = np.indices(elevation.shape)
+    r = np.sqrt((y - cy) ** 2 + (x - cx) ** 2)
+    max_r = r.max()
+    edges = np.linspace(0, max_r, bins + 1)
+    vectors = []
+    for i in range(bins):
+        mask = (r >= edges[i]) & (r < edges[i + 1])
+        if np.any(mask):
+            vec = np.mean(np.exp(1j * aspect[mask]))
+            vectors.append(vec)
+    if len(vectors) < 2:
+        std = np.pi
+    else:
+        angles = np.angle(vectors)
+        std = np.std(angles)
+    score = np.clip(1.0 - std / np.pi, 0.0, 1.0)
+    return np.full_like(elevation, float(score))
+
+# ------------------------------------------------------------------
+def psi0_symmetry_kde(elevation, radius):
+    """f7 replacement: kernel-density estimate of structural symmetry."""
+    from scipy.ndimage import gaussian_filter
+    gy, gx = np.gradient(elevation)
+    orientation = np.arctan2(gy, gx)
+    kde = gaussian_filter(np.cos(orientation) ** 2, sigma=radius / 4)
+    kde_norm = kde / (np.max(kde) + 1e-6)
+    return kde_norm
 
 def detect_structures_phi0(features_8d, elevation_data, detection_threshold=0.5):
     """
