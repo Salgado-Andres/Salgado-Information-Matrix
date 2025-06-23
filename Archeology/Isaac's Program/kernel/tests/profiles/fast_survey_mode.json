@@ -1,0 +1,80 @@
+{
+  "name": "Fast Survey Mode",
+  "description": "Quick detection with minimal features for large area surveys",
+  "structure_type": "generic",
+  "version": "1.0",
+  "created_by": "G\u2082 System",
+  "geometry": {
+    "resolution_m": 0.5,
+    "structure_radius_m": 8.0,
+    "min_structure_size_m": 3.0,
+    "max_structure_size_m": 50.0,
+    "patch_shape": "square",
+    "patch_size_m": [
+      20.0,
+      20.0
+    ],
+    "aspect_ratio_tolerance": 0.3
+  },
+  "thresholds": {
+    "detection_threshold": 0.5,
+    "confidence_threshold": 0.6,
+    "early_decision_threshold": 0.75,
+    "min_modules_for_decision": 1,
+    "max_modules_for_efficiency": 6,
+    "uncertainty_tolerance": 0.2
+  },
+  "features": {
+    "histogram": {
+      "enabled": true,
+      "weight": 2.0,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "volume": {
+      "enabled": true,
+      "weight": 1.5,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "dropoff": {
+      "enabled": false,
+      "weight": 1.0,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "compactness": {
+      "enabled": false,
+      "weight": 1.0,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "entropy": {
+      "enabled": false,
+      "weight": 1.0,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "planarity": {
+      "enabled": false,
+      "weight": 1.0,
+      "parameters": {},
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    }
+  },
+  "aggregation_method": "streaming",
+  "parallel_execution": true,
+  "max_workers": 5,
+  "enable_refinement": true,
+  "max_refinement_attempts": 2,
+  "optimization_history": [],
+  "performance_metrics": {},
+  "last_used": null,
+  "use_count": 0
+}

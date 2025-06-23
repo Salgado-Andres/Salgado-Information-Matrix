@@ -1,0 +1,92 @@
+{
+  "name": "High Resolution Settlement",
+  "description": "High-resolution detection for small settlements",
+  "structure_type": "settlement",
+  "version": "1.0",
+  "created_by": "G\u2082 System",
+  "geometry": {
+    "resolution_m": 0.25,
+    "structure_radius_m": 15.0,
+    "min_structure_size_m": 3.0,
+    "max_structure_size_m": 50.0,
+    "patch_shape": "square",
+    "patch_size_m": [
+      40.0,
+      40.0
+    ],
+    "aspect_ratio_tolerance": 0.3
+  },
+  "thresholds": {
+    "detection_threshold": 0.45,
+    "confidence_threshold": 0.6,
+    "early_decision_threshold": 0.85,
+    "min_modules_for_decision": 2,
+    "max_modules_for_efficiency": 6,
+    "uncertainty_tolerance": 0.2
+  },
+  "features": {
+    "histogram": {
+      "enabled": true,
+      "weight": 1.5,
+      "parameters": {
+        "similarity_method": "correlation"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "volume": {
+      "enabled": true,
+      "weight": 1.4,
+      "parameters": {
+        "volume_method": "trapezoid"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "dropoff": {
+      "enabled": true,
+      "weight": 1.2,
+      "parameters": {
+        "edge_method": "gradient"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "compactness": {
+      "enabled": true,
+      "weight": 1.1,
+      "parameters": {
+        "shape_method": "circularity"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "entropy": {
+      "enabled": true,
+      "weight": 1.2,
+      "parameters": {
+        "entropy_method": "shannon"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    },
+    "planarity": {
+      "enabled": true,
+      "weight": 1.1,
+      "parameters": {
+        "plane_method": "least_squares"
+      },
+      "polarity_preference": null,
+      "confidence_threshold": 0.0
+    }
+  },
+  "aggregation_method": "streaming",
+  "parallel_execution": true,
+  "max_workers": 5,
+  "enable_refinement": true,
+  "max_refinement_attempts": 2,
+  "optimization_history": [],
+  "performance_metrics": {},
+  "last_used": null,
+  "use_count": 0
+}

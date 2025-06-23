@@ -1,0 +1,147 @@
+{
+  "name": "Amazon Geoglyph Ring Detector",
+  "description": "Optimized profile for detecting circular earthworks, ring ditches, and geometric geoglyphs in Amazonian archaeological contexts",
+  "structure_type": "amazon_geoglyph",
+  "version": "1.0",
+  "created_by": "Archaeological G₂ System",
+  "geometry": {
+    "resolution_m": 0.6,
+    "structure_radius_m": 50.0,
+    "min_structure_size_m": 20.0,
+    "max_structure_size_m": 300.0,
+    "patch_shape": "square",
+    "patch_size_m": [
+      120.0,
+      120.0
+    ],
+    "aspect_ratio_tolerance": 0.15
+  },
+  "thresholds": {
+    "detection_threshold": 0.55,
+    "confidence_threshold": 0.5,
+    "early_decision_threshold": 0.85,
+    "min_modules_for_decision": 4,
+    "max_modules_for_efficiency": 6,
+    "uncertainty_tolerance": 0.18
+  },
+  "feature_overrides": {
+    "histogram": {
+      "similarity_method": "correlation",
+      "bin_count": 28,
+      "edge_enhancement": true,
+      "adaptive_binning": true,
+      "noise_reduction": true,
+      "min_variation": 0.3,
+      "polarity_preference": "negative"
+    },
+    "volume": {
+      "volume_method": "ring_adapted",
+      "base_volume_normalization": 80.0,
+      "base_prominence_normalization": -1.5,
+      "border_width_factor": 0.35,
+      "adaptive_scaling": true,
+      "concentration_bonus": 0.8,
+      "relative_prominence_weight": 0.8,
+      "min_volume_threshold": -2.0,
+      "auto_range_adaptation": true,
+      "percentile_normalization": true,
+      "polarity_preference": "negative"
+    },
+    "dropoff": {
+      "edge_method": "ring_gradient",
+      "smoothing_radius": 1.2,
+      "adaptive_threshold": true,
+      "directional_analysis": true,
+      "edge_enhancement": true,
+      "sigma_inner_factor": 0.8,
+      "sigma_outer_factor": 1.2,
+      "polarity_preference": "negative"
+    },
+    "compactness": {
+      "shape_method": "ring_circularity",
+      "n_angles": 60,
+      "min_samples": 24,
+      "symmetry_factor": 0.9,
+      "adaptive_radius": true,
+      "fourier_analysis": true,
+      "edge_detection": true,
+      "noise_tolerance": 0.06,
+      "polarity_preference": "positive"
+    },
+    "entropy": {
+      "entropy_method": "ring_shannon",
+      "spatial_bins": 18,
+      "edge_weight": 1.5,
+      "normalization": "ring_local",
+      "adaptive_threshold": true,
+      "polarity_preference": "positive"
+    },
+    "planarity": {
+      "plane_method": "ring_plane",
+      "outlier_threshold": 1.8,
+      "edge_weight": 0.8,
+      "smoothing_radius": 1.0,
+      "adaptive_fitting": true,
+      "polarity_preference": "positive"
+    }
+  },
+  "polarity_preferences": {
+    "histogram": "negative",
+    "volume": "negative",
+    "dropoff": "negative",
+    "compactness": "positive",
+    "entropy": "positive",
+    "planarity": "positive"
+  },
+  "feature_weights": {
+    "histogram": 1.3,
+    "volume": 1.5,
+    "dropoff": 1.4,
+    "compactness": 1.8,
+    "entropy": 2.0,
+    "planarity": 0.8
+  },
+  "environmental_context": {
+    "terrain_type": "cleared_pasture",
+    "vegetation_density": "low_to_moderate",
+    "soil_type": "oxisol",
+    "drainage_context": "well_drained",
+    "expected_degradation": "low_to_moderate"
+  },
+  "archaeological_parameters": {
+    "cultural_period": "pre_columbian_geometric",
+    "settlement_type": ["ceremonial", "astronomical", "territorial_marker"],
+    "typical_depth_range_m": [0.5, 3.0],
+    "typical_diameter_range_m": [30.0, 200.0],
+    "shape_variability": "low",
+    "preservation_quality": "excellent",
+    "geometric_features": ["perfect_circles", "concentric_rings", "radial_patterns", "astronomical_alignments"]
+  },
+  "detection_priorities": {
+    "geometric_precision": 0.95,
+    "circular_symmetry": 0.9,
+    "ditch_definition": 0.85,
+    "cultural_significance": 0.8
+  },
+  "ring_specific_parameters": {
+    "ring_width_tolerance": 0.3,
+    "concentricity_threshold": 0.85,
+    "gap_tolerance": 0.1,
+    "causeway_detection": true,
+    "radial_feature_detection": true
+  },
+  "aggregation_method": "geometric_consensus",
+  "parallel_execution": true,
+  "max_workers": 4,
+  "enable_refinement": true,
+  "max_refinement_attempts": 3,
+  "optimization_history": [],
+  "performance_metrics": {},
+  "validation_notes": {
+    "known_sites": ["Acre_geoglyphs", "Rondonia_rings", "Bolivian_geometric_sites"],
+    "false_positive_patterns": ["cattle_rings", "natural_ponds", "modern_pivot_irrigation"],
+    "challenging_contexts": ["partial_forest_cover", "modern_agriculture", "road_intersections"]
+  },
+  "last_used": null,
+  "use_count": 0
+}

@@ -1,0 +1,139 @@
+{
+  "name": "Amazon Civilization Mound Detector",
+  "description": "Optimized profile for detecting artificial earthwork mounds and settlements in Amazonian archaeological contexts",
+  "structure_type": "amazon_mound",
+  "version": "1.0",
+  "created_by": "Archaeological G₂ System",
+  "geometry": {
+    "resolution_m": 1.0,
+    "structure_radius_m": 25.0,
+    "min_structure_size_m": 10.0,
+    "max_structure_size_m": 150.0,
+    "patch_shape": "square",
+    "patch_size_m": [
+      60.0,
+      60.0
+    ],
+    "aspect_ratio_tolerance": 0.4
+  },
+  "thresholds": {
+    "detection_threshold": 0.45,
+    "confidence_threshold": 0.4,
+    "early_decision_threshold": 0.8,
+    "min_modules_for_decision": 4,
+    "max_modules_for_efficiency": 6,
+    "uncertainty_tolerance": 0.2
+  },
+  "feature_overrides": {
+    "histogram": {
+      "similarity_method": "correlation",
+      "bin_count": 30,
+      "edge_enhancement": true,
+      "adaptive_binning": true,
+      "noise_reduction": true,
+      "min_variation": 0.15,
+      "polarity_preference": "positive"
+    },
+    "volume": {
+      "volume_method": "adaptive",
+      "base_volume_normalization": 120.0,
+      "base_prominence_normalization": 2.5,
+      "border_width_factor": 0.25,
+      "adaptive_scaling": true,
+      "concentration_bonus": 1.1,
+      "relative_prominence_weight": 0.6,
+      "min_volume_threshold": 8.0,
+      "auto_range_adaptation": true,
+      "percentile_normalization": true,
+      "polarity_preference": "positive"
+    },
+    "dropoff": {
+      "edge_method": "gradient",
+      "smoothing_radius": 1.5,
+      "adaptive_threshold": true,
+      "directional_analysis": true,
+      "edge_enhancement": false,
+      "sigma_inner_factor": 0.6,
+      "sigma_outer_factor": 1.5,
+      "polarity_preference": "positive"
+    },
+    "compactness": {
+      "shape_method": "elliptical",
+      "n_angles": 36,
+      "min_samples": 15,
+      "symmetry_factor": 0.65,
+      "adaptive_radius": true,
+      "fourier_analysis": true,
+      "edge_detection": true,
+      "noise_tolerance": 0.12,
+      "polarity_preference": "neutral"
+    },
+    "entropy": {
+      "entropy_method": "shannon",
+      "spatial_bins": 20,
+      "edge_weight": 1.1,
+      "normalization": "regional",
+      "adaptive_threshold": true,
+      "polarity_preference": "negative"
+    },
+    "planarity": {
+      "plane_method": "robust",
+      "outlier_threshold": 2.5,
+      "edge_weight": 0.5,
+      "smoothing_radius": 2.0,
+      "adaptive_fitting": true,
+      "polarity_preference": "negative"
+    }
+  },
+  "polarity_preferences": {
+    "histogram": "positive",
+    "volume": "positive",
+    "dropoff": "positive",
+    "compactness": "neutral",
+    "entropy": "negative",
+    "planarity": "negative"
+  },
+  "feature_weights": {
+    "histogram": 0.9,
+    "volume": 1.2,
+    "dropoff": 0.8,
+    "compactness": 0.7,
+    "entropy": 2.5,
+    "planarity": 0.5
+  },
+  "environmental_context": {
+    "terrain_type": "tropical_lowland",
+    "vegetation_density": "high",
+    "soil_type": "alluvial",
+    "drainage_context": "floodplain",
+    "expected_degradation": "moderate_to_high"
+  },
+  "archaeological_parameters": {
+    "cultural_period": "pre_columbian",
+    "settlement_type": ["ceremonial", "residential", "defensive"],
+    "typical_height_range_m": [1.0, 8.0],
+    "typical_diameter_range_m": [15.0, 100.0],
+    "shape_variability": "high",
+    "preservation_quality": "variable"
+  },
+  "detection_priorities": {
+    "artificial_vs_natural": 0.8,
+    "cultural_significance": 0.7,
+    "preservation_state": 0.6,
+    "accessibility": 0.5
+  },
+  "aggregation_method": "weighted_consensus",
+  "parallel_execution": true,
+  "max_workers": 4,
+  "enable_refinement": true,
+  "max_refinement_attempts": 4,
+  "optimization_history": [],
+  "performance_metrics": {},
+  "validation_notes": {
+    "known_sites": [],
+    "false_positive_patterns": ["natural_hills", "termite_mounds", "tree_falls"],
+    "challenging_contexts": ["dense_canopy", "seasonal_flooding", "modern_disturbance"]
+  },
+  "last_used": null,
+  "use_count": 0
+}

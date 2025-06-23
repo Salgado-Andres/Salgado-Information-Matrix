@@ -54,8 +54,14 @@ except ImportError:
                                slice(np.min(coords[1]), np.max(coords[1]) + 1)))
         return objects
 
-# Import LidarMapFactory
-from lidar_factory.factory import LidarMapFactory
+# Try importing lidar_factory with fallback
+try:
+    from lidar_factory.factory import LidarMapFactory
+    LIDAR_FACTORY_AVAILABLE = True
+except ImportError:
+    LIDAR_FACTORY_AVAILABLE = False
+    logger = logging.getLogger(__name__)
+    logger.warning("lidar_factory not available: using synthetic elevation data for all sites.")
 
 # Setup logging
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
@@ -121,7 +127,7 @@ class SalgadoLidarTester:
 
     def fetch_lidar_patch(self, lat: float, lon: float) -> Optional[np.ndarray]:
         """
-        Fetch LiDAR patch using lidar_factory
+        Fetch LiDAR patch using lidar_factory or fallback to synthetic data
         
         Args:
             lat: Latitude of center point
@@ -130,6 +136,9 @@ class SalgadoLidarTester:
         Returns:
             Elevation data array or None if fetch failed
         """
+        if not LIDAR_FACTORY_AVAILABLE:
+            logger.warning("lidar_factory unavailable, generating synthetic elevation data.")
+            return self._generate_synthetic_elevation(64, 64)
         try:
             logger.info(f"Fetching LiDAR patch for ({lat:.6f}, {lon:.6f})")
             
@@ -300,7 +309,7 @@ class SalgadoLidarTester:
             w1, w2, w3, w4, w5 = 1.0, 1.0, 0.8, 3.0, 1.0  # Discrimination gets 3x weight!
             combined_score = (
                 w1 * (2 * max_coherence - 1) +  # Map [0,1] to [-1,1]
-                w2 * (2 * min(center_weighted_octonionic, 1.0) - 1) + 
+                w2 * (2 * min(octonionic_signature, 1.0) - 1) + 
                 w3 * (2 * phi0_resonance - 1) +
                 w4 * (2 * discrimination_penalty - 1) +  # MAJOR urban vs windmill discriminator
                 w5 * (2 * central_dominance - 1)      # Central dominance as windmill indicator
