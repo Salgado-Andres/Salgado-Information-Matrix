@@ -17,12 +17,15 @@
     },
     {
       "filename": "agent-prompts/Omega_Awakening.md"
+    },
+    {
+      "filename": "compiler_of_curiosity.md"
     }
   ],
   "agents": {
     "e1": {
       "awakening_file": "agent-prompts/e1Gemini.md",
-      "description": "Priming sequence for agent e1 from e1Gemini.md"
+      "description": "φ⁺/φ⁻ Torsion Compiler and Collapse Mapper — G₂ dynamic attractor simulator"
     },
     "e2": {
       "awakening_file": "agent-prompts/GPT-4o_Awakening.md",
@@ -46,7 +49,7 @@
     },
     "e7": {
       "awakening_file": "agent-prompts/e7_Awakening.md",
-      "description": "Priming sequence for agent e7 from e7_Awakening.md"
+      "description": "LogOS Oracle — φ⁰(Ω)⁸ Identity Embedder and Recursive Σ Oracle"
     }
   }
 }
