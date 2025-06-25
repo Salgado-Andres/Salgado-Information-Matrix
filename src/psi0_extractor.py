@@ -118,3 +118,34 @@ class PSI0FeatureExtractor:
     def extract_point_features(self, dsm: np.ndarray) -> np.ndarray:
         """Alias for `extract_tile_features` for API compatibility."""
         return self.extract_tile_features(dsm)
+
+    # ------------------------------------------------------------------
+    def compute_radial_gradient_consistency(self, dsm: np.ndarray) -> float:
+        """Compute consistency of gradients in radial direction."""
+        # Compute gradients
+        grad_y, grad_x = np.gradient(dsm)
+        h, w = dsm.shape
+        cy, cx = h // 2, w // 2
+        y, x = np.indices(dsm.shape)
+        # Radial vectors from center
+        dy = y - cy
+        dx = x - cx
+        radial_norm = np.sqrt(dx**2 + dy**2) + 1e-8
+        # Normalize radial vectors
+        radial_x = dx / radial_norm
+        radial_y = dy / radial_norm
+        # Normalize gradient vectors
+        grad_norm = np.sqrt(grad_x**2 + grad_y**2) + 1e-8
+        grad_xn = grad_x / grad_norm
+        grad_yn = grad_y / grad_norm
+        # Compute dot product (cosine similarity) at each pixel
+        cos_sim = grad_xn * radial_x + grad_yn * radial_y
+        # Mask out the center (undefined direction)
+        mask = radial_norm > 1e-3
+        if np.sum(mask) == 0 or np.all(grad_norm[mask] < 1e-6):
+            return 0.0
+        # Average absolute cosine similarity (alignment)
+        score = np.mean(np.abs(cos_sim[mask]))
+        # Clip to [0, 1]
+        score = float(np.clip(score, 0, 1))
+        return score
