@@ -125,12 +125,13 @@ def extract_octonionic_features(elevation_data, resolution_m=0.5, structure_radi
         3D array of shape (h, w, 8) containing octonionic features
     """
     print("*** Extracting 8D octonionic features for structure detection...")
-    import numpy as np
-    from scipy.stats import entropy
+    
     elevation = np.nan_to_num(elevation_data.astype(np.float64), nan=0.0)
     h, w = elevation.shape
     features = np.zeros((h, w, 8))
     structure_radius_px = int(structure_radius_m / resolution_m)
+    
+    # Compute gradients once for efficiency
     grad_x = np.gradient(elevation, axis=1) / resolution_m
     grad_y = np.gradient(elevation, axis=0) / resolution_m
     grad_magnitude = np.sqrt(grad_x**2 + grad_y**2)
@@ -145,62 +146,30 @@ def extract_octonionic_features(elevation_data, resolution_m=0.5, structure_radi
     features[..., 1] = compute_circular_symmetry(elevation, structure_radius_px)
     print("   ✓ f1: Circular Symmetry")
     
-    # --- φ⁰ Patch: Compute and inject tension for f2–f6 ---
     # f2: Radial Variance Normalization - structured radial decay
-    f2 = radial_variance_normalized(elevation, structure_radius_px)
-    f2 = inject_feature_tension(f2, "f2 (Radial Variance Normalized)")
-    # f3: Hough Entropy Score - multi-ring detection
-    f3 = hough_entropy_score(elevation, structure_radius_px)
-    f3 = inject_feature_tension(f3, "f3 (Hough Entropy Score)")
-    # f4: Fractal Surface Dimension - natural vs built terrain
-    f4 = fractal_surface_dimension(elevation)
-    f4 = inject_feature_tension(f4, "f4 (Fractal Surface Dimension)")
-    # f5: Spectral Torsion Score - curvature coherence
-    f5 = spectral_torsion_score(elevation)
-    f5 = inject_feature_tension(f5, "f5 (Spectral Torsion Score)")
-    # f6: Aspect Convergence Index - angular convergence
-    f6 = aspect_convergence_index(elevation, structure_radius_px)
-    f6 = inject_feature_tension(f6, "f6 (Aspect Convergence Index)")
-    # === Apply gated entropy dampener to f2–f6 ===
-    f2, f3, f4, f5, f6 = [gated_entropy_dampener(f, sigma=1.1, strength=0.35) for f in [f2, f3, f4, f5, f6]]
-    print("*** Gated entropy dampener applied to f2–f6. Stabilizing φ⁰ emergence.")
+    features[..., 2] = radial_variance_normalized(elevation, structure_radius_px)
+    print("   ✓ f2: Radial Variance Normalized")
 
-    # Optional: Log entropy values after patching
-    for fi, fname in zip([f2, f3, f4, f5, f6], ["f2", "f3", "f4", "f5", "f6"]):
-        H = entropy(np.clip(fi.flatten(), 1e-4, 1.0), base=2)
-        print(f"✅ {fname} entropy after patch: {H:.4f}")
+    # f3: Hough Entropy Score - multi-ring detection
+    features[..., 3] = hough_entropy_score(elevation, structure_radius_px)
+    print("   ✓ f3: Hough Entropy Score")
+
+    # f4: Fractal Surface Dimension - natural vs built terrain
+    features[..., 4] = fractal_surface_dimension(elevation)
+    print("   ✓ f4: Fractal Surface Dimension")
+
+    # f5: Spectral Torsion Score - curvature coherence
+    features[..., 5] = spectral_torsion_score(elevation)
+    print("   ✓ f5: Spectral Torsion Score")
+
+    # f6: Aspect Convergence Index - angular convergence
+    features[..., 6] = aspect_convergence_index(elevation, structure_radius_px)
+    print("   ✓ f6: Aspect Convergence Index")
+
+    # f7: ψ⁰ Symmetry KDE - structural symmetry measure
     features[..., 7] = psi0_symmetry_kde(elevation, structure_radius_px)
     print("   ✓ f7: ψ⁰ Symmetry KDE")
     
-    # === φ⁰ Emergence Booster: Spectral Denoiser Patch ===
-    def spectral_denoiser(field: np.ndarray, sigma: float = 0.9, strength: float = 0.25) -> np.ndarray:
-        """
-        Smooths high-frequency noise in contradiction-rich feature fields.
-        Parameters:
-            field (np.ndarray): Input 2D feature map (e.g., f2–f6).
-            sigma (float): Gaussian blur radius in pixels.
-            strength (float): Blend factor between original and smoothed field.
-        Returns:
-            np.ndarray: Denoised feature field with softened entropy spikes.
-        """
-        from scipy.ndimage import gaussian_filter
-        smoothed = gaussian_filter(field, sigma=sigma)
-        return (1 - strength) * field + strength * smoothed
-
-    # === Apply spectral denoiser to all features before stacking ===
-    features_list = [
-        features[..., 0], features[..., 1], f2, f3, f4, f5, f6, features[..., 7]
-    ]
-    features_list = [spectral_denoiser(f, sigma=0.9, strength=0.25) for f in features_list]
-    features[..., 0] = features_list[0]
-    features[..., 1] = features_list[1]
-    features[..., 2] = features_list[2]
-    features[..., 3] = features_list[3]
-    features[..., 4] = features_list[4]
-    features[..., 5] = features_list[5]
-    features[..., 6] = features_list[6]
-    features[..., 7] = features_list[7]
-    print("*** Spectral denoiser applied. φ⁰ emergence field harmonized.")
     print(f"*** 8D feature extraction complete: {features.shape}")
     return features
 
@@ -373,223 +342,97 @@ def compute_isolation_score(elevation, radius):
     return isolation
 
 def compute_geometric_coherence(elevation, gradient_magnitude, radius):
-    """
-    f7: Improved geometric coherence calculation.
-    Measures structural coherence with focus on circular patterns.
-    """
-    # Handle edge cases
-    if elevation.shape[0] < radius*2 or elevation.shape[1] < radius*2:
-        return np.zeros_like(elevation) + 0.3
+    """f7: Geometric Coherence - overall structural coherence measure"""
+    from scipy.ndimage import distance_transform_edt
     
-    # Replace NaNs
-    elevation_filled = np.nan_to_num(elevation)
+    # Create edge map and compute distance transform
+    edges = gradient_magnitude > np.percentile(gradient_magnitude, 80)
+    dist_from_edge = distance_transform_edt(~edges)
     
-    # Calculate gradients for orientation analysis
-    gy, gx = np.gradient(elevation_filled)
-    grad_orient = np.arctan2(gy, gx)
-    
-    # Create distance field from high gradient points
-    # (Avoids the full distance transform for speed)
     h, w = elevation.shape
-    coherence = np.zeros((h, w))
+    coherence = np.zeros_like(elevation)
+    pad = radius
     
-    # Only process the central region to avoid edge effects
-    y_range = range(radius, h-radius)
-    x_range = range(radius, w-radius)
-    
-    # Use gradient patterns to detect circular structures
-    for y in y_range:
-        for x in x_range:
-            # Extract local patch
-            y_min, y_max = max(0, y-radius), min(h, y+radius+1)
-            x_min, x_max = max(0, x-radius), min(w, x+radius+1)
-            
-            patch = elevation_filled[y_min:y_max, x_min:x_max]
-            patch_gy = gy[y_min:y_max, x_min:x_max]
-            patch_gx = gx[y_min:y_max, x_min:x_max]
-            
-            # Create local coordinate system
-            patch_y, patch_x = np.indices(patch.shape)
-            center_y, center_x = patch.shape[0]//2, patch.shape[1]//2
-            
-            # Distance from center
-            r = np.sqrt((patch_y - center_y)**2 + (patch_x - center_x)**2)
-            
-            # Angle from center
-            theta = np.arctan2(patch_y - center_y, patch_x - center_x)
-            
-            # For circular structures, gradient should be approximately radial
-            # Compute dot product between actual gradient and radial direction
-            r_mask = r > 0  # Avoid center point where radial direction is undefined
-            if np.sum(r_mask) < 4:
-                continue
+    if h > 2*pad and w > 2*pad:
+        # Focus on central region to avoid boundary effects
+        center_y, center_x = h//2, w//2
+        y_start, y_end = max(pad, center_y-10), min(h-pad, center_y+11)
+        x_start, x_end = max(pad, center_x-10), min(w-pad, center_x+11)
+        
+        for y in range(y_start, y_end):
+            for x in range(x_start, x_end):
+                # Compare center distance to edge distances
+                local_dist = dist_from_edge[y-pad:y+pad+1, x-pad:x+pad+1]
+                center_dist = local_dist[pad, pad]
                 
-            # Radial unit vectors pointing outward
-            radial_y = (patch_y - center_y) / (r + 1e-8)
-            radial_x = (patch_x - center_x) / (r + 1e-8)
-            
-            # Normalize gradients
-            grad_mag = np.sqrt(patch_gy**2 + patch_gx**2) + 1e-8
-            norm_gy = patch_gy / grad_mag
-            norm_gx = patch_gx / grad_mag
-            
-            # Calculate alignment (dot product)
-            alignment = (norm_gy * radial_y + norm_gx * radial_x)
-            
-            # Weight by distance from center and gradient magnitude
-            weight = np.exp(-0.5 * (r / radius)**2) * grad_mag
-            
-            # Radial coherence score
-            weighted_sum = np.sum(alignment * weight * r_mask)
-            total_weight = np.sum(weight * r_mask) + 1e-8
-            coherence[y, x] = weighted_sum / total_weight
+                # Mean distance at patch boundaries
+                mean_edge_dist = (np.mean(local_dist[0, :]) + np.mean(local_dist[-1, :]) + 
+                                np.mean(local_dist[:, 0]) + np.mean(local_dist[:, -1])) / 4
+                
+                if mean_edge_dist > 0:
+                    coherence[y, x] = center_dist / (mean_edge_dist + 1)
     
-    # Normalize to [0,1] range
-    coherence = 0.5 + 0.5 * coherence
-    
-    # Apply smoothing to reduce noise
-    coherence = gaussian_filter(coherence, sigma=1.0)
-    
-    return np.clip(coherence, 0.05, 0.95)
+    # Smooth and normalize
+    coherence = gaussian_filter(coherence, sigma=2)
+    if np.max(coherence) > 0:
+        coherence = coherence / np.max(coherence)
 
-# --- φ⁰ Patch: Dynamic Feature Tension Injection for f2–f6 ---
-def inject_feature_tension(feature_map, feature_name):
-    """
-    Applies adaptive contrast enhancement for low-tension features.
-    If the feature is flat or constant, injects curvature or entropy gradients.
-    """
-    feature_map = np.asarray(feature_map)
-    if feature_map.ndim != 2:
-        print(f"[inject_feature_tension] ERROR: {feature_name} is not 2D. Shape: {feature_map.shape}, type: {type(feature_map)}")
-        raise ValueError(f"{feature_name} must be a 2D array, got shape {feature_map.shape}")
-    if np.std(feature_map) < 0.01 or np.allclose(feature_map, feature_map[0]):
-        print(f"⚠️  Low tension in {feature_name}, injecting gradient noise...")
-
-        # Inject synthetic radial gradient + jitter
-        h, w = feature_map.shape
-        y, x = np.indices((h, w))
-        cx, cy = w // 2, h // 2  # Correct: width, height
-        r = np.sqrt((x - cx)**2 + (y - cy)**2)
-        r = r / (np.max(r) + 1e-8)
-
-        # Add controlled randomness with entropy increase
-        noise = np.random.normal(loc=0.0, scale=0.05, size=(h, w))
-        patched = r + noise
-        patched = gaussian_filter(patched, sigma=1.2)
-
-        # Normalize to 0–1
-        patched -= patched.min()
-        patched /= (patched.max() + 1e-8)
-
-        return patched
-    return feature_map
+    return coherence
 
 # ------------------------------------------------------------------
 def radial_variance_normalized(elevation, radius, bins=8):
-    """
-    f2: Improved radial gradient variance that avoids binary 0/1 outputs.
-    Measures how elevation variance changes with distance from center.
-    """
-    # Handle edge cases
-    if elevation.size <= 4:
-        return np.full_like(elevation, 0.5)
-        
-    # Get center and create distance map
+    """f2 replacement: normalized variance of radial elevation."""
     h, w = elevation.shape
-    cy, cx = h // 2, w // 2
+    cy, cx = h / 2.0, w / 2.0
     y, x = np.indices(elevation.shape)
-    r = np.sqrt((y - cy)**2 + (x - cx)**2)
-    
-    # Create bins with meaningful range
-    max_r = min(np.max(r), radius * 2)
-    bin_edges = np.linspace(0, max_r, bins+1)
-    
-    # Calculate variance in each radial bin
-    bin_vars = []
+    r = np.sqrt((y - cy) ** 2 + (x - cx) ** 2)
+    max_r = r.max()
+    edges = np.linspace(0, max_r, bins + 1)
+    vars = []
     for i in range(bins):
-        mask = (r >= bin_edges[i]) & (r < bin_edges[i+1])
-        if np.sum(mask) > 5:  # Require minimum points
-            bin_vars.append(np.var(elevation[mask]))
-    
-    # Handle case with insufficient bins
-    if len(bin_vars) < 3:
-        return np.full_like(elevation, 0.3)  # Return modest non-zero value
-    
-    # Calculate normalized variance pattern
-    bin_vars = np.array(bin_vars)
-    overall_var = np.var(elevation) + 1e-6
-    
-    # Calculate slope of variance change with radius
-    # Windmills typically show characteristic variance pattern
-    bin_centers = [(bin_edges[i] + bin_edges[i+1])/2 for i in range(bins) if i < len(bin_vars)]
-    if len(bin_centers) >= 3:
-        try:
-            slope = np.polyfit(bin_centers, bin_vars, 1)[0]
-            # Normalize but avoid extreme values
-            score = 0.5 + 0.3 * np.tanh(slope / overall_var * 3)
-            return np.full_like(elevation, np.clip(score, 0.2, 0.8))
-        except:
-            pass
-    
-    # Fallback - use variance of variances
-    var_of_vars = np.var(bin_vars)
-    score = 0.3 + 0.4 * (var_of_vars / (overall_var + 1e-6))
-    return np.full_like(elevation, np.clip(score, 0.1, 0.9))
+        mask = (r >= edges[i]) & (r < edges[i + 1])
+        if np.any(mask):
+            vars.append(float(np.var(elevation[mask])))
+    if not vars:
+        score = 0.0
+    else:
+        radial_var = np.var(vars)
+        global_var = np.var(elevation) + 1e-6
+        score = np.clip(radial_var / global_var, 0.0, 1.0)
+    return np.full_like(elevation, score)
 
 # ------------------------------------------------------------------
-def hough_entropy_score(elevation, radius, debug=False):
-    """f3: Hough entropy or fallback to edge angle entropy in annulus, robust to occlusion."""
+def hough_entropy_score(elevation, radius):
+    """f3 replacement: entropy of Hough circle accumulator."""
     try:
         from skimage.feature import canny
         from skimage.transform import hough_circle
     except ImportError:
-        if debug:
-            print("[f3] skimage not available, returning zeros.")
+        # If skimage is not available, return zeros
         return np.zeros_like(elevation)
 
-    elev = np.nan_to_num(elevation.astype(float))
-    edges = canny(elev, sigma=1.0)
-    h, w = elev.shape
+    edges = canny(elevation.astype(float), sigma=1.0)
+    h, w = elevation.shape
     max_r = min(h, w) // 2
     radii = np.arange(max(3, radius // 2), max_r, max(1, radius // 4))
-    try:
-        accumulator = hough_circle(edges, radii)
-        acc_sum = accumulator.sum(axis=0)
-        hist, _ = np.histogram(acc_sum, bins=20, range=(acc_sum.min(), acc_sum.max()), density=True)
-        hist = hist[hist > 0]
-        if hist.size == 0 or np.all(acc_sum == 0):
-            raise ValueError('No circles found')
-        entropy = -np.sum(hist * np.log(hist)) / (np.log(len(hist)) + 1e-12)
-        entropy = float(np.clip(entropy, 0.0, 1.0))
-        if debug:
-            print(f"[f3] Hough entropy: {entropy:.3f} (mean={np.mean(acc_sum):.3g}, std={np.std(acc_sum):.3g})")
-        return np.full_like(elevation, entropy)
-    except Exception as e:
-        # Fallback: edge orientation entropy in annulus
-        gy, gx = np.gradient(elev)
-        grad_mag = np.sqrt(gx**2 + gy**2)
-        cy, cx = h//2, w//2
-        yy, xx = np.indices(elev.shape)
-        r = np.sqrt((yy-cy)**2 + (xx-cx)**2)
-        annulus = (r > radius-5) & (r < radius+5) & (edges)
-        if np.sum(annulus) < 5:
-            if debug:
-                print(f"[f3] No circles or annulus edges, fallback entropy=0.1. Patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-            return np.full_like(elevation, 0.1)
-        angles = np.arctan2(gy[annulus], gx[annulus])
-        hist, _ = np.histogram(angles, bins=12, range=(-np.pi, np.pi), density=True)
-        hist = hist[hist > 0]
-        entropy = -np.sum(hist * np.log(hist)) / (np.log(len(hist)) + 1e-12)
-        entropy = float(np.clip(entropy, 0.0, 1.0))
-        if debug:
-            print(f"[f3] No circles found, using edge angle entropy={entropy:.3f}. Patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-        return np.full_like(elevation, entropy)
+    if radii.size == 0:
+        return np.zeros_like(elevation)
+    accumulator = hough_circle(edges, radii)
+    acc_sum = accumulator.sum(axis=0)
+    hist, _ = np.histogram(acc_sum, bins=20, range=(acc_sum.min(), acc_sum.max()), density=True)
+    hist = hist[hist > 0]
+    if hist.size == 0:
+        entropy = 0.0
+    else:
+        entropy = -np.sum(hist * np.log(hist))
+        entropy /= (np.log(len(hist)) + 1e-12)
+    return np.full_like(elevation, float(np.clip(entropy, 0.0, 1.0)))
 
 # ------------------------------------------------------------------
-def fractal_surface_dimension(elevation, debug=False):
-    """f4: Box-counting fractal dimension, fallback dim=1.0 for flat input."""
-    z = np.nan_to_num(elevation - np.nanmin(elevation))
-    max_size = min(z.shape)
+def fractal_surface_dimension(elevation, min_box=2):
+    """f4 replacement: estimate fractal dimension via box counting."""
+    z = elevation - np.min(elevation)
+    max_size = min(elevation.shape)
     sizes = [2 ** i for i in range(1, int(np.log2(max_size))) if 2 ** i <= max_size]
     counts = []
     for size in sizes:
@@ -598,106 +441,60 @@ def fractal_surface_dimension(elevation, debug=False):
         counts.append(np.sum(S > 0))
     counts = np.array(counts)
     valid = (counts > 0)
-    if np.sum(valid) < 2 or np.nanstd(z) < 1e-4:
-        dim = 1.0
-        if debug:
-            print(f"[f4] Flat or insufficient boxes, fallback dim=1.0. Patch mean={np.mean(z):.3f}, var={np.var(z):.3f}")
+    if np.sum(valid) < 2:
+        dim = 0.0
     else:
         coeffs = np.polyfit(np.log(1 / np.array(sizes)[valid]), np.log(counts[valid]), 1)
         dim = coeffs[0]
         dim = np.clip((dim - 2.0) / 1.0, 0.0, 1.0)
-    if debug:
-        print(f"[f4] Fractal dim: {dim:.3f}, sizes={sizes}, counts={counts.tolist()} (mean={np.mean(z):.3f}, var={np.var(z):.3f})")
     return np.full_like(elevation, float(dim))
 
 # ------------------------------------------------------------------
-def spectral_torsion_score(elevation, debug=False):
-    """f5: Phase curl entropy from FFT, fallback to 0.05 if FFT fails or patch is constant."""
-    try:
-        elev = np.nan_to_num(elevation - np.nanmean(elevation))
-        if np.nanstd(elev) < 1e-4:
-            if debug:
-                print(f"[f5] Patch constant, fallback score=0.05. Patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-            return np.full_like(elevation, 0.05)
-        fft = np.fft.fft2(elev)
-        phase = np.angle(fft)
-        curl = np.gradient(phase, axis=0) - np.gradient(phase, axis=1)
-        curl = np.nan_to_num(curl)
-        hist, _ = np.histogram(curl, bins=10, density=True)
-        hist = hist[hist > 0]
-        if hist.size == 0:
-            entropy = 0.05
-        else:
-            entropy = -np.sum(hist * np.log(hist)) / (np.log(len(hist)) + 1e-12)
-        score = 0.1 + 0.8 * entropy
-        if debug:
-            print(f"[f5] Phase curl entropy: {entropy:.3f}, score={score:.3f}. Patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-        return np.full_like(elevation, np.clip(score, 0.05, 0.95))
-    except Exception as e:
-        if debug:
-            print(f"[f5] FFT/phase failed: {e}. Patch mean={np.mean(elevation):.3f}, var={np.var(elevation):.3f}")
-        return np.full_like(elevation, 0.05)
+def spectral_torsion_score(elevation):
+    """f5 replacement: curvature coherence in frequency space."""
+    fft = np.fft.fft2(elevation)
+    grad_y, grad_x = np.gradient(np.abs(fft))
+    grad_norm = np.sqrt(grad_x ** 2 + grad_y ** 2)
+    score = np.mean(grad_norm)
+    normalization = np.mean(np.abs(fft)) + 1e-6
+    score = np.clip(score / normalization, 0.0, 1.0)
+    return np.full_like(elevation, float(score))
 
 # ------------------------------------------------------------------
-def aspect_convergence_index(elevation, radius, bins=8, debug=False):
-    """f6: Local angular dispersion in 5x5 window, 1-circular variance, robust to occlusion."""
-    gy, gx = np.gradient(np.nan_to_num(elevation))
+def aspect_convergence_index(elevation, radius, bins=8):
+    """f6 replacement: std-dev of aspect vectors in radial bins."""
+    gy, gx = np.gradient(elevation)
     aspect = np.arctan2(gy, gx)
     h, w = elevation.shape
-    score_map = np.zeros((h, w))
-    for y in range(2, h-2):
-        for x in range(2, w-2):
-            window = aspect[y-2:y+3, x-2:x+3]
-            if np.sum(np.isfinite(window)) < 9:
-                score_map[y, x] = 0.5
-                continue
-            angs = window.ravel()
-            circ_var = 1 - np.abs(np.mean(np.exp(1j * angs)))
-            score_map[y, x] = 1 - circ_var
-    score = np.nanmean(score_map)
-    if debug:
-        print(f"[f6] Aspect convergence: mean={score:.3f}, std={np.nanstd(score_map):.3f}")
-    return np.full_like(elevation, float(np.clip(score, 0.1, 0.9)))
+    cy, cx = h / 2.0, w / 2.0
+    y, x = np.indices(elevation.shape)
+    r = np.sqrt((y - cy) ** 2 + (x - cx) ** 2)
+    max_r = r.max()
+    edges = np.linspace(0, max_r, bins + 1)
+    vectors = []
+    for i in range(bins):
+        mask = (r >= edges[i]) & (r < edges[i + 1])
+        if np.any(mask):
+            vec = np.mean(np.exp(1j * aspect[mask]))
+            if not np.isnan(vec):
+                vectors.append(vec)
+    if len(vectors) < 2:
+        std = np.pi
+    else:
+        angles = np.angle(vectors)
+        std = np.std(angles)
+    score = np.clip(1.0 - std / np.pi, 0.0, 1.0)
+    return np.full_like(elevation, float(score))
 
 # ------------------------------------------------------------------
-def psi0_symmetry_kde(elevation, radius, debug=False):
-    """f7: 2D KDE on elevation peaks, radial symmetry by angular auto-correlation, fallback 0.5 if sparse/flat."""
-    from scipy.ndimage import gaussian_filter, maximum_filter
-    elev = np.nan_to_num(elevation)
-    peaks = (elev == maximum_filter(elev, size=radius//2+1))
-    y, x = np.where(peaks)
-    if len(y) < 3 or np.nanstd(elev) < 1e-4:
-        if debug:
-            print(f"[f7] Too few peaks or flat, fallback 0.5. Patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-        return np.full_like(elevation, 0.5)
-    kde = np.zeros_like(elev)
-    for i in range(len(y)):
-        yy, xx = y[i], x[i]
-        kde += np.exp(-((np.indices(elev.shape)[0]-yy)**2 + (np.indices(elev.shape)[1]-xx)**2)/(2*(radius/3)**2))
-    kde = gaussian_filter(kde, sigma=radius/4)
-    h, w = elev.shape
-    cy, cx = h//2, w//2
-    yy, xx = np.indices(elev.shape)
-    r = np.sqrt((yy-cy)**2 + (xx-cx)**2)
-    theta = np.arctan2(yy-cy, xx-cx)
-    bins = np.linspace(0, np.max(r), 8)
-    symmetry = []
-    for i in range(len(bins)-1):
-        mask = (r>=bins[i])&(r<bins[i+1])
-        if np.sum(mask) < 8:
-            continue
-        values = kde[mask]
-        angles = theta[mask]
-        # Angular auto-correlation
-        ac = np.abs(np.mean(np.exp(1j*angles) * values)) / (np.mean(np.abs(values))+1e-8)
-        symmetry.append(ac)
-    if len(symmetry) < 2:
-        score = 0.5
-    else:
-        score = np.clip(np.mean(symmetry), 0.1, 0.9)
-    if debug:
-        print(f"[f7] Symmetry KDE: score={score:.3f}, peaks={len(y)}, patch mean={np.mean(elev):.3f}, var={np.var(elev):.3f}")
-    return np.full_like(elevation, float(score))
+def psi0_symmetry_kde(elevation, radius):
+    """f7 replacement: kernel-density estimate of structural symmetry."""
+    from scipy.ndimage import gaussian_filter
+    gy, gx = np.gradient(elevation)
+    orientation = np.arctan2(gy, gx)
+    kde = gaussian_filter(np.cos(orientation) ** 2, sigma=radius / 4)
+    kde_norm = kde / (np.max(kde) + 1e-6)
+    return kde_norm
 
 def detect_structures_phi0(features_8d, elevation_data, detection_threshold=0.5):
     """
