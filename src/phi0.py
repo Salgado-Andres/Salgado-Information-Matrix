@@ -60,3 +60,10 @@ def collapse_field(psi_field: Dict[str, Any], depth: int = 1) -> Dict[str, Any]:
 
     return {"phi0": phi0, "feedback": feedback, "candidates": candidates}
 
+class Phi0:
+    def __init__(self):
+        pass
+
+    def collapse(self, psi_out, depth=1):
+        return collapse_field(psi_out, depth=depth)
+

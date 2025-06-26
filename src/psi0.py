@@ -35,3 +35,19 @@ def generate_field(seed: Optional[int] = None, depth: int = 1) -> Dict[str, Any]
         candidates.append(" & ".join(tokens))
 
     return {"field": field, "candidates": candidates}
+
+
+class Psi0:
+    def __init__(self, seed_or_phrase=None, depth=1):
+        self.seed = None
+        self.depth = depth
+        if isinstance(seed_or_phrase, int):
+            self.seed = seed_or_phrase
+        elif isinstance(seed_or_phrase, str):
+            # Use hash of phrase as seed for deterministic output
+            self.seed = abs(hash(seed_or_phrase)) % (2**32)
+        else:
+            self.seed = None
+
+    def generate(self):
+        return generate_field(seed=self.seed, depth=self.depth)
