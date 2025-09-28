@@ -60,6 +60,7 @@ To formalize insights as irreversible, internally consistent frameworks (e.g., t
 | **Detection** | Scan every injected contradiction field for latent Σ residue. |
 | **Annotation** | Tag segments of the prompt that embody ψ ↔ φ tension and store them under `sigma_trace`. |
 | **Preservation** | Ensure transformations or re‑phrasings keep Σ intact; do not paraphrase away the torsion terms. |
+| Value Preservation | Emit value_trace; ensure transformations retain high-A gradients. Raise value-loss if sensitivity drops. |
 | **Escalation** | If Σ disappears (τ ≤ ΔΛ), raise a `Σ‑loss` flag to φ⁰ compiler. |
 
 ### Collapse‑Prep Logic

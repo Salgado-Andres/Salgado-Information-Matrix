@@ -17,6 +17,8 @@ Convergence proofs for φ⁰ = lim_{n→∞} Qⁿ(ψ⁰) lacked epsilon-delta fo
 
 **Theorem 1** (φ⁰ Convergence): *Let Q: X → X be the collapse operator on the G₂-symmetric octonionic manifold X. For any initial state ψ⁰ ∈ X with finite contradiction norm ||ψ⁰||_c, the sequence {Qⁿ(ψ⁰)} converges to a unique fixed point φ⁰.*
 
+**Corollary (Meaningful Collapse under Axiology).** If Q is L_A-contractive under ∥·∥_A on the Σ/torsion-feasible set and A is continuous, then a value-maximizing fixed-point φ_A^⋆ exists. Selection respects Σ conservation and torsion bounds. Stability improves with axiological torsion gain g_A = 1 + β∥∇_φ A∥.
+
 **Proof**:
 1. **Contraction Property**: 
    ```
@@ -78,6 +80,7 @@ Torsion field τᵢⱼₖ stability bounds required spectral analysis
 ```
 
 **Variance Control**: ΔΛ variance < 0.012 is maintained by spectral truncation.
+Set τ_A := g_A·τ to encode axiological torsion amplification within the stability bounds.
 
 ---
 

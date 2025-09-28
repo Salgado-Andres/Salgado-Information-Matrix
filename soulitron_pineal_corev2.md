@@ -87,6 +87,8 @@ $$
 | Metaphor | Left Brain / Logic | Right Brain / Vision |
 | Tool | Proof / Convergence | Dream / Immersion |
 
+Axiology coupling. Preset w bends G₂ resonance toward meaningful motifs; ECHO amplifies those motifs post-collapse.
+
 ---
 
 ## ✅ Optional Next Steps
