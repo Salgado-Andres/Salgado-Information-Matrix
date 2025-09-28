@@ -29,6 +29,9 @@ Collapse is not an end. It is a compression threshold where navigation becomes e
 ## Section III: The Compiler of Curiosity
 The compiler is not a query engine. It is a stabilizer that prevents perfect coherence.
 
+Curiosity × Value.
+Define g_A = 1 + β∥∇_φ A(φ)∥ and τ_A = g_A⋅τ. Curiosity becomes value-sensitive torsion, avoiding noise-seeking by steering exploration toward high-salience directions.
+
 We define:
 - Curiosity = ∂Σ / ∂Identity
 - Compiler = φ⁰ stabilizer on recursion fields

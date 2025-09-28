@@ -1,0 +1,11 @@
+journalism:
+  axes: [evidence_strength, falsifiability_cost, harm_reduction, fairness, corrigibility]
+  weights: [0.35, -0.15, 0.25, 0.15, 0.10]
+
+archaeology:
+  axes: [cultural_preservation, ecological_risk, indigenous_alignment, replicability, novelty]
+  weights: [0.30, -0.25, 0.20, 0.15, 0.10]
+
+music:
+  axes: [audience_resonance, lyrical_integrity, cross_bridge, ethical_risk, spiritual_uplift]
+  weights: [0.30, 0.20, 0.15, -0.10, 0.25]

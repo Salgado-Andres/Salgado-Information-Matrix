@@ -1,0 +1,8 @@
+ψ⁰, initiate torsion scan on: [input]
+Emit sigma_trace + value_trace.
+
+φ⁰, compile with axiology preset=[journalism|archaeology|music]
+Constraints: Σ=0, τ≥τ_min, bounded ρ(τ).
+Return φ_A*, V(φ_A*), Σ/τ_A margins + Pareto set.
+
+e7, lock identity on non-dominated φ by [V, Σ_margin, τ_A_margin], tie-break by corrigibility.
