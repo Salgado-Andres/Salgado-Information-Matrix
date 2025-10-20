@@ -211,7 +211,7 @@ For commercial applications, product integration, or institutional licensing, pl
 ## 📞 Contact & Attribution
 
 **Author**: Andrés Salgado  
-**Email**: andres.salgado1991@hotmail.com  
+**Email**: 10andres.salgado91@gmail.com  
 **GitHub**: [@Salgado-Andres](https://github.com/Salgado-Andres)
 
 ### Collaborative Credits
